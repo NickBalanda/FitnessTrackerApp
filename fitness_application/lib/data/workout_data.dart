@@ -14,12 +14,53 @@ class WorkoutData extends ChangeNotifier {
       exercises: [
         Exercise(
           name: 'Push Ups', 
-          weight: 'Bodyweight', 
+          weight: '-', 
           reps: '15', 
           sets: '3',
         ),
+        Exercise(
+          name: 'Pull Ups', 
+          weight: '-', 
+          reps: '10', 
+          sets: '3',
+        ),
+        Exercise(
+          name: 'Plank', 
+          weight: '-', 
+          reps: '60 seconds', 
+          sets: '3',
+        ),
+        Exercise(
+          name: 'Burpees', 
+          weight: '-', 
+          reps: '12', 
+          sets: '3',
+        ),
       ],
-    )
+    ),
+    Workout(
+      name: 'Leg Day',
+      exercises: [
+        Exercise(
+          name: 'Squats', 
+          weight: '-', 
+          reps: '20', 
+          sets: '4',
+        ),
+        Exercise(
+          name: 'Lunges', 
+          weight: '-', 
+          reps: '15', 
+          sets: '3',
+        ),
+        Exercise(
+          name: 'Calf Raises', 
+          weight: '-', 
+          reps: '25', 
+          sets: '4',
+        ),
+      ],
+    ),
   ];
 
   //get the list of workouts

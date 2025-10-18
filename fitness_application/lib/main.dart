@@ -1,4 +1,6 @@
+import 'package:fitness_application/data/workout_data.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'pages/home_page.dart';
 void main() {
   runApp(const MyApp());
