@@ -1,8 +1,10 @@
+import 'package:fitness_application/data/hive_database.dart';
 import 'package:fitness_application/models/exercise.dart';
 import 'package:fitness_application/models/workout.dart';
 import 'package:flutter/material.dart';
 
 class WorkoutData extends ChangeNotifier {
+  final db = HiveDatabase();
   /*
     Workout data structure
     - This overall list contains multiple workouts
@@ -63,6 +65,14 @@ class WorkoutData extends ChangeNotifier {
     ),
   ];
 
+  // if there there are workouts already in database, then get that workout list,otherwise use the default workout list
+  void initializeWorkoutList() {
+    if (db.previousDataExists()) {
+      workoutList = db.readFromDatabase();
+    } else {
+      db.saveToDatabase(workoutList);
+    }
+  }
   //get the list of workouts
   List<Workout> getWorkoutList() {
     return workoutList;
@@ -77,7 +87,9 @@ class WorkoutData extends ChangeNotifier {
     workoutList.add(
       Workout(name: name, exercises: []),
     );
-    notifyListeners();}
+    notifyListeners();
+    db.saveToDatabase(workoutList);
+  }
   //add an exercise to a workout
   void addExercise(String workoutName, String exerciseName, String weight, String reps, String sets) {
     Workout relevantWorkout = getRelevantWorkout(workoutName);
@@ -90,12 +102,14 @@ class WorkoutData extends ChangeNotifier {
       ),
     );
     notifyListeners();
+    db.saveToDatabase(workoutList);
   } 
   //check off exercise
   void checkOffExercise(String workoutName, String exerciseName) {
     Exercise relevantExercise = getRelevantExercise(workoutName, exerciseName);
     relevantExercise.isCompleted = !relevantExercise.isCompleted;
     notifyListeners();
+    db.saveToDatabase(workoutList);
   }
   
   //return relevant workout object, given a workout name
